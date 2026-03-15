@@ -550,7 +550,7 @@ const Footer = () => {
         {/* Bottom bar */}
         <div className="ft-bottom">
           <span className="ft-copy">
-            © 2025 <span>CodeBin</span>. Built for developers, by developers.
+            © 2026 <span>CodeBin</span>. Built for developers, by Developer.
           </span>
           <div className="ft-bottom-links">
             <NavLink to="#" className="ft-bottom-link">Terms</NavLink>

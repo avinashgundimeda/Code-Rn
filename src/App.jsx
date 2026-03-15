@@ -6,6 +6,7 @@ import Docs from "./Pages/docs";
 import Contact from "./Pages/contact";
 import Editor from "./Pages/editor";
 import Login from "./Pages/login";
+import NotFound from "./Pages/404notfound";
 
 function App() {
   return (
@@ -17,7 +18,7 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/login" element={<Login />} />
         <Route path="/editor" element={<Editor />} />
-        <Route path="*" element={<Editor />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </div>
   );

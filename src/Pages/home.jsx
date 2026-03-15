@@ -665,8 +665,12 @@ const Home = () => {
                 CodeBin is your browser-based code editor and compiler. Write in any language, execute instantly, and share your work with a single link — no setup required.
               </p>
               <div className="cb-hero-ctas">
-                <button className="cb-btn-primary">Start Coding →</button>
-                <button className="cb-btn-ghost">Explore Snippets</button>
+                <button className="cb-btn-primary" onClick={() => window.location.href = '/editor'}>
+                  Start Coding →
+                </button>
+                <button className="cb-btn-ghost " onClick={() => window.location.href = '/docs'}>
+                  Explore Docs →
+                </button>
               </div>
             </div>
 
