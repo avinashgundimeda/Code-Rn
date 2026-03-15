@@ -10,7 +10,7 @@ const Header = () => {
         className={({ isActive }) =>
           isActive
             ? "text-white text-sm font-medium"
-            : "text-zinc-500 hover:text-zinc-300 text-sm"
+            : "text-zinc-500 hover:text-[#75B06F] text-sm"
         }
       >
         Overview
