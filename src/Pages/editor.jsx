@@ -9,7 +9,7 @@ const LANGUAGES = [
   { label: "JavaScript", value: "javascript", version: "18.15.0", ext: "main.js", default: `// JavaScript\nconsole.log("Hello, World!");` },
   { label: "TypeScript", value: "typescript", version: "5.0.3", ext: "main.ts", default: `// TypeScript\nconsole.log("Hello, World!");` },
   { label: "Python", value: "python", version: "3.10.0", ext: "main.py", default: `# Python\nprint("Hello, World!")` },
-  { label: "Java", value: "java", version: "15.0.2", ext: "Main.java", default: `// Java\npublic class Main {\n    public static void main(String[] args) {\n        System.out.println("Hello, World!");\n    }\n}` },
+  { label: "Java", value: "java", version: "15.0.2", ext: "Main.java", default: `// Java\npublic class Main {\n    public static void main(String[] args) {\n System.out.println("Hello, World!");\n    }\n}` },
   { label: "Rust", value: "rust", version: "1.68.2", ext: "main.rs", default: `// Rust\nfn main() {\n    println!("Hello, World!");\n}` },
   { label: "C++", value: "cpp", version: "10.2.0", ext: "main.cpp", default: `// C++\n#include <iostream>\nint main() {\n    std::cout << "Hello, World!" << std::endl;\n    return 0;\n}` },
   { label: "Go", value: "go", version: "1.16.2", ext: "main.go", default: `// Go\npackage main\n\nimport "fmt"\n\nfunc main() {\n    fmt.Println("Hello, World!")\n}` },
