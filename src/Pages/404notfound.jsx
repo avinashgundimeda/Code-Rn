@@ -1,46 +1,51 @@
-import React, { useEffect, useState } from 'react'
-import { NavLink } from 'react-router-dom'
-import Navbar from '../Components/navbar'
+import React, { useEffect, useState } from "react";
+import { NavLink } from "react-router-dom";
 
-const glitchChars = '!<>-_\\/[]{}—=+*^?#'
+const glitchChars = "!<>-_\\/[]{}—=+*^?#";
 
 function useGlitch(text, active) {
-  const [display, setDisplay] = useState(text)
+  const [display, setDisplay] = useState(text);
 
   useEffect(() => {
-    if (!active) { setDisplay(text); return }
-    let frame = 0
-    const total = 18
+    if (!active) {
+      setDisplay(text);
+      return;
+    }
+    let frame = 0;
+    const total = 18;
     const interval = setInterval(() => {
-      frame++
+      frame++;
       setDisplay(
-        text.split('').map((char, i) => {
-          if (frame / total > i / text.length) return char
-          return glitchChars[Math.floor(Math.random() * glitchChars.length)]
-        }).join('')
-      )
-      if (frame >= total) clearInterval(interval)
-    }, 40)
-    return () => clearInterval(interval)
-  }, [active, text])
+        text
+          .split("")
+          .map((char, i) => {
+            if (frame / total > i / text.length) return char;
+            return glitchChars[Math.floor(Math.random() * glitchChars.length)];
+          })
+          .join(""),
+      );
+      if (frame >= total) clearInterval(interval);
+    }, 40);
+    return () => clearInterval(interval);
+  }, [active, text]);
 
-  return display
+  return display;
 }
 
 const NotFound = () => {
-  const [glitch, setGlitch] = useState(false)
-  const [mounted, setMounted] = useState(false)
+  const [glitch, setGlitch] = useState(false);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    setTimeout(() => setMounted(true), 80)
+    setTimeout(() => setMounted(true), 80);
     const loop = setInterval(() => {
-      setGlitch(true)
-      setTimeout(() => setGlitch(false), 900)
-    }, 4000)
-    return () => clearInterval(loop)
-  }, [])
+      setGlitch(true);
+      setTimeout(() => setGlitch(false), 900);
+    }, 4000);
+    return () => clearInterval(loop);
+  }, []);
 
-  const title = useGlitch('PAGE_NOT_FOUND', glitch)
+  const title = useGlitch("PAGE_NOT_FOUND", glitch);
 
   return (
     <>
@@ -69,7 +74,6 @@ const NotFound = () => {
           color: var(--white);
           font-family: 'Syne', sans-serif;
           min-height: 100vh;
-          padding-top: 64px;
           display: flex;
           flex-direction: column;
           overflow: hidden;
@@ -407,58 +411,72 @@ const NotFound = () => {
         <div className="nf-glow" />
         <div className="nf-deco">404</div>
 
-        <Navbar />
-
         <div className="nf-body">
-
           {/* 404 */}
-          <div className={`nf-404-wrap ${glitch ? 'glitching' : ''}`}>
-            <div className={`nf-404 ${mounted ? 'in' : ''}`}>404</div>
+          <div className={`nf-404-wrap ${glitch ? "glitching" : ""}`}>
+            <div className={`nf-404 ${mounted ? "in" : ""}`}>404</div>
           </div>
 
           {/* Glitch title */}
-          <div className={`nf-code ${mounted ? 'in' : ''}`}>
-            {title}
-          </div>
+          <div className={`nf-code ${mounted ? "in" : ""}`}>{title}</div>
 
-          <h1 className={`nf-title ${mounted ? 'in' : ''}`}>
+          <h1 className={`nf-title ${mounted ? "in" : ""}`}>
             You've gone too far, Coder.
           </h1>
 
-          <p className={`nf-desc ${mounted ? 'in' : ''}`}>
-            This route doesn't exist. The page you're looking for was never here — or got deleted somewhere between your last commit and now.
+          <p className={`nf-desc ${mounted ? "in" : ""}`}>
+            This route doesn't exist. The page you're looking for was never here
+            — or got deleted somewhere between your last commit and now.
           </p>
 
           {/* Terminal block */}
-          <div className={`nf-terminal ${mounted ? 'in' : ''}`}>
+          <div className={`nf-terminal ${mounted ? "in" : ""}`}>
             <div className="nf-term-bar">
-              <div className="nf-term-dot" style={{ background: '#ff5f57' }} />
-              <div className="nf-term-dot" style={{ background: '#febc2e' }} />
-              <div className="nf-term-dot" style={{ background: '#75B06F' }} />
+              <div className="nf-term-dot" style={{ background: "#ff5f57" }} />
+              <div className="nf-term-dot" style={{ background: "#febc2e" }} />
+              <div className="nf-term-dot" style={{ background: "#75B06F" }} />
               <span className="nf-term-title">bash — CodeRn</span>
             </div>
             <div className="nf-term-body">
               <div className="nf-term-line">
                 <span className="nf-term-prompt">$</span>
-                <span className="nf-term-cmd">GET {window?.location?.pathname || '/unknown'}</span>
+                <span className="nf-term-cmd">
+                  GET {window?.location?.pathname || "/unknown"}
+                </span>
               </div>
               <div className="nf-term-line">
-                <span className="nf-term-prompt" style={{ color: 'rgba(255,100,100,0.8)' }}>✖</span>
-                <span className="nf-term-err">404 Not Found — route does not exist</span>
+                <span
+                  className="nf-term-prompt"
+                  style={{ color: "rgba(255,100,100,0.8)" }}
+                >
+                  ✖
+                </span>
+                <span className="nf-term-err">
+                  404 Not Found — route does not exist
+                </span>
               </div>
               <div className="nf-term-line">
-                <span className="nf-term-prompt" style={{ color: 'var(--g400)' }}>#</span>
-                <span className="nf-term-hint">try navigating back to a known route</span>
+                <span
+                  className="nf-term-prompt"
+                  style={{ color: "var(--g400)" }}
+                >
+                  #
+                </span>
+                <span className="nf-term-hint">
+                  try navigating back to a known route
+                </span>
               </div>
               <div className="nf-term-line" style={{ marginTop: 4 }}>
                 <span className="nf-term-prompt">$</span>
-                <span className="nf-term-cmd"><span className="nf-term-cursor" /></span>
+                <span className="nf-term-cmd">
+                  <span className="nf-term-cursor" />
+                </span>
               </div>
             </div>
           </div>
 
           {/* Actions */}
-          <div className={`nf-actions ${mounted ? 'in' : ''}`}>
+          <div className={`nf-actions ${mounted ? "in" : ""}`}>
             <NavLink to="/home" className="nf-btn-primary">
               ← Back to Home
             </NavLink>
@@ -468,17 +486,29 @@ const NotFound = () => {
           </div>
 
           {/* Quick links */}
-          <div className={`nf-links ${mounted ? 'in' : ''}`}>
-            <NavLink to="/docs"    className="nf-link">Docs</NavLink>
-            <NavLink to="/contact" className="nf-link">Contact</NavLink>
-            <NavLink to="/login"   className="nf-link">Login</NavLink>
-            <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="nf-link">GitHub</a>
+          <div className={`nf-links ${mounted ? "in" : ""}`}>
+            <NavLink to="/docs" className="nf-link">
+              Docs
+            </NavLink>
+            <NavLink to="/contact" className="nf-link">
+              Contact
+            </NavLink>
+            <NavLink to="/login" className="nf-link">
+              Login
+            </NavLink>
+            <a
+              href="https://github.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="nf-link"
+            >
+              GitHub
+            </a>
           </div>
-
         </div>
       </div>
     </>
-  )
-}
+  );
+};
 
-export default NotFound
+export default NotFound;
