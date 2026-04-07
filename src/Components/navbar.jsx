@@ -1,26 +1,33 @@
-import React, { useState, useEffect } from 'react'
-import { NavLink } from 'react-router-dom'
+import React, { useState, useEffect } from "react";
+import { NavLink } from "react-router-dom";
+import {
+  SignedIn,
+  SignedOut,
+  SignInButton,
+  SignUpButton,
+  UserButton,
+} from "@clerk/clerk-react";
 
 const links = [
-  { to: '/home',    label: 'Home' },
-  { to: '/docs',    label: 'Docs' },
-  { to: '/contact', label: 'Contact' },
-  { to: '/editor',  label: 'Editor' },
-]
+  { to: "/home", label: "Home" },
+  { to: "/docs", label: "Docs" },
+  { to: "/contact", label: "Contact" },
+  { to: "/editor", label: "Editor" },
+];
 
 const Navbar = () => {
-  const [scrolled, setScrolled] = useState(false)
-  const [menuOpen, setMenuOpen] = useState(false)
+  const [scrolled, setScrolled] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20)
-    window.addEventListener('scroll', onScroll)
-    return () => window.removeEventListener('scroll', onScroll)
-  }, [])
+    const onScroll = () => setScrolled(window.scrollY > 20);
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   return (
     <>
-      <style>{`
+    <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@600;700;800&display=swap');
 
         .cb-nav {
@@ -275,8 +282,8 @@ const Navbar = () => {
           .cb-hamburger { display: flex; }
         }
       `}</style>
-
-      <nav className={`cb-nav ${scrolled ? 'scrolled' : 'top'}`}>
+      <nav className={`cb-nav ${scrolled ? "scrolled" : "top"}`}>
+        
         {/* Brand */}
         <NavLink to="/" className="cb-brand">
           CodeRn<span className="cb-brand-dot">.</span>
@@ -289,46 +296,75 @@ const Navbar = () => {
             <NavLink
               key={to}
               to={to}
-              className={({ isActive }) => `cb-link${isActive ? ' active' : ''}`}
+              className={({ isActive }) =>
+                `cb-link${isActive ? " active" : ""}`
+              }
             >
               {label}
             </NavLink>
           ))}
-        </div>
 
-        {/* Login */}
-        <NavLink to="/login" className="cb-login">
-          Login →
-        </NavLink>
+          {/* 🔥 AUTH SECTION */}
+          <SignedOut>
+            <SignInButton>
+              <button className="cb-login">Sign In</button>
+            </SignInButton>
+
+            <SignUpButton>
+              <button className="cb-login">Sign Up</button>
+            </SignUpButton>
+          </SignedOut>
+
+          <SignedIn>
+            <UserButton afterSignOutUrl="/" />
+          </SignedIn>
+        </div>
 
         {/* Hamburger */}
         <button
-          className={`cb-hamburger${menuOpen ? ' open' : ''}`}
-          onClick={() => setMenuOpen(v => !v)}
-          aria-label="Toggle menu"
+          className={`cb-hamburger${menuOpen ? " open" : ""}`}
+          onClick={() => setMenuOpen((v) => !v)}
         >
-          <span /><span /><span />
+          <span />
+          <span />
+          <span />
         </button>
       </nav>
 
       {/* Mobile Menu */}
-      <div className={`cb-mobile-menu${menuOpen ? ' open' : ''}`}>
+      <div className={`cb-mobile-menu${menuOpen ? " open" : ""}`}>
         {links.map(({ to, label }) => (
           <NavLink
             key={to}
             to={to}
-            className={({ isActive }) => `cb-mobile-link${isActive ? ' active' : ''}`}
+            className={({ isActive }) =>
+              `cb-mobile-link${isActive ? " active" : ""}`
+            }
             onClick={() => setMenuOpen(false)}
           >
             {label}
           </NavLink>
         ))}
-        <NavLink to="/login" className="cb-mobile-login" onClick={() => setMenuOpen(false)}>
-          Login →
-        </NavLink>
+
+        {/* 🔥 MOBILE AUTH */}
+        <SignedOut>
+          <SignInButton>
+            <button className="cb-mobile-login">Sign In</button>
+          </SignInButton>
+
+          <SignUpButton>
+            <button className="cb-mobile-login">Sign Up</button>
+          </SignUpButton>
+        </SignedOut>
+
+        <SignedIn>
+          <div className="mt-3 flex justify-center">
+            <UserButton afterSignOutUrl="/" />
+          </div>
+        </SignedIn>
       </div>
     </>
-  )
-}
+  );
+};
 
-export default Navbar
+export default Navbar;
