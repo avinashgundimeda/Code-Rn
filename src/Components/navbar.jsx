@@ -1,13 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
-import {
-  SignedIn,
-  SignedOut,
-  SignInButton,
-  SignUpButton,
-  UserButton,
-} from "@clerk/clerk-react";
-
 const links = [
   { to: "/home", label: "Home" },
   { to: "/docs", label: "Docs" },
@@ -303,21 +295,6 @@ const Navbar = () => {
               {label}
             </NavLink>
           ))}
-
-          {/* 🔥 AUTH SECTION */}
-          <SignedOut>
-            <SignInButton>
-              <button className="cb-login">Sign In</button>
-            </SignInButton>
-
-            <SignUpButton>
-              <button className="cb-login">Sign Up</button>
-            </SignUpButton>
-          </SignedOut>
-
-          <SignedIn>
-            <UserButton afterSignOutUrl="/" />
-          </SignedIn>
         </div>
 
         {/* Hamburger */}
@@ -346,22 +323,6 @@ const Navbar = () => {
           </NavLink>
         ))}
 
-        {/* 🔥 MOBILE AUTH */}
-        <SignedOut>
-          <SignInButton>
-            <button className="cb-mobile-login">Sign In</button>
-          </SignInButton>
-
-          <SignUpButton>
-            <button className="cb-mobile-login">Sign Up</button>
-          </SignUpButton>
-        </SignedOut>
-
-        <SignedIn>
-          <div className="mt-3 flex justify-center">
-            <UserButton afterSignOutUrl="/" />
-          </div>
-        </SignedIn>
       </div>
     </>
   );
